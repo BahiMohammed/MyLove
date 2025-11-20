@@ -1,0 +1,140 @@
+:root{
+            --primary: #fff;
+            --bg-color: rgb(5, 53, 61);
+            --bg-envelope-color: #f5edd1;
+            --envelope-tab: #ecdeb8;
+            --envelope-cover: #e6cfa7;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --txt-color: #444;
+            --heart-color: rgb(252, 8, 231);
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* لتوسيط المحتوى */
+        }
+        .container {
+            /* حذف grid لتركيز التوسيط على body */
+            display: grid; 
+            place-items: center;
+        }
+        .container > .envelope-wrapper {
+            background: var(--bg-envelope-color);
+            box-shadow: 0 0 50px var(--shadow-color); /* زيادة الظل */
+        }
+        .container .envelope-wrapper .envelope{
+            position: relative;
+            width: 500px; /* تم التكبير */
+            height: 350px; /* تم التكبير */
+        }
+        .envelope-wrapper > .envelope::before{
+            content: "";
+            position: absolute;
+            top: 0;
+            z-index: 2;
+            border-top: 280px solid var(--envelope-tab); /* تم التكبير */
+            border-right: 250px solid transparent; /* تم التكبير */
+            border-left: 250px solid transparent; /* تم التكبير */
+            transform-origin: top;
+            transition: all 0.5s ease-in-out 0.7s;
+        }
+        .container .envelope-wrapper .envelope::after{
+            content: "";
+            position: absolute;
+            z-index: 2;
+            width: 0;
+            height: 0;
+            border-top: 250px solid transparent; /* تم التكبير */
+            border-right: 250px solid var(--envelope-cover); /* تم التكبير */
+            border-bottom: 200px solid var(--envelope-cover); /* تم التكبير */
+            border-left: 250px solid var(--envelope-cover); /* تم التكبير */
+        }
+        .envelope > .letter{
+            position: absolute;
+            left: 10%;
+            bottom: -88px;
+            width: 75%; /* تم التكبير */
+            height: 85%; /* تم التكبير */
+            background: var(--primary);
+            text-align: center;
+            transition: all 1s ease-in-out;
+            box-shadow: 0 0 10px var(--shadow-color);
+            padding: 70px 20px; /* تم التكبير */
+            /* تنسيق النص ليظهر في منتصف الرسالة */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* لإخفاء أي جزء زائد عند الفتح */
+        }
+        .container .envelope-wrapper .envelope .letter .text{
+            font-family: 'Cairo', Arial, sans-serif; /* تم تغيير الخط */
+            color: var(--txt-color);
+            text-align: right; /* محاذاة لليمين للغة العربية */
+            font-size: 20px; /* تم التكبير */
+            line-height: 1.6; /* مسافة بين السطور */
+            max-width: 100%;
+        }
+        .heart{
+            position: absolute;
+            top: 54%;
+            left: 50%;
+            width: 25px; /* تم التكبير */
+            height: 25px; /* تم التكبير */
+            background: var(--heart-color);
+            z-index: 4;
+            transform: translate(-50%, -20%) rotate(-45deg);
+            transition: transform 0.5s ease-in-out 1s;
+            box-shadow: 0 1px 10px var(--shadow-color);
+            cursor: pointer;
+        }
+        .heart::before,
+        .heart::after{
+            content: "";
+            position: absolute;
+            width: 25px; /* تم التكبير */
+            height: 25px; /* تم التكبير */
+            background: var(--heart-color);
+            border-radius: 50%; 
+        }
+        .heart::before{
+            top: -12.5px; /* تم التعديل بناءً على الحجم الجديد */
+        }
+        .heart::after{
+            right: -12.5px; /* تم التعديل بناءً على الحجم الجديد */
+        }
+
+        /* حركات الفتح */
+        .flap .envelope::before{
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+        .flap .envelope .letter {
+            bottom: 350px; /* تم التعديل للرفع أكثر */
+            transform: scale(1.1); /* تم التعديل لزوم أقل وأوضح */
+            transition-delay: 1s;
+        }
+        .flap .heart{
+            transform: rotate(45deg);
+            transition-delay: 0.4s;
+        }
+        a.back-link {
+    display: inline-block;
+    margin-top: -11px;
+    padding: 10px 15px;
+    background-color: var(--heart-color); /* لون القلب الوردي */
+    color: var(--primary); /* نص أبيض */
+    text-decoration: none; /* إزالة الخط تحت الرابط */
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    font-size: 0.8em; /* أصغر قليلاً من النص الأساسي */
+}
+
+a.back-link:hover {
+    background-color: rgb(220, 0, 200); /* لون أغمق عند المرور عليه */
+}
