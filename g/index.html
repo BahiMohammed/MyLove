@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هدية حبيبي</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+    /* تأكد أن هذا الرابط يعمل بشكل صحيح لخط Cairo */
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+    :root {
+        --primary-color: #ff69b4; /* لون وردي حار */
+        --background-color: #121212; /* خلفية داكنة */
+        --text-color: #f0f0f0;
+        --card-background: #1e1e1e;
+        --locked-color: #555;
+    }
+
+    body {
+        /* الأهم: استخدام خط Cairo وإضافة خطوط احتياطية */
+        font-family: 'Cairo', Arial, sans-serif; 
+        background-color: var(--background-color);
+        color: var(--text-color);
+        direction: rtl; /* لدعم اللغة العربية */
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+    }
+
+    h1 {
+        color: var(--primary-color);
+        margin-bottom: 40px;
+        font-size: 2.5em;
+    }
+
+    .timeline {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        padding-bottom: 50px;
+    }
+
+    /* خط التايم لاين الرأسي */
+    .timeline::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    background-color: var(--primary-color);
+    top: 0;
+    /* تأكد من أن bottom مضبوط ليغطي كل المحتوى */
+    bottom: 0; /* هذا هو السطر الذي قد يحتاج لضبط */ 
+    right: 50%; /* وسط الصفحة */
+    margin-right: -1.5px;
+    z-index: 0; /* تأكد أن الخط خلف البطاقات */
+}
+
+    .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        background-color: inherit;
+        width: 50%;
+        margin-bottom: 20px;
+    }
+
+   /* ترتيب العناصر: العناصر الفردية (1, 3, 5...) تظهر على اليسار في التصميم */
+.timeline-item:nth-child(odd) {
+    right: 100%; 
+    transform: translateX(50%); 
+    text-align: right; /* محاذاة النص داخل البطاقة لليمين */
+}
+/* ترتيب العناصر: العناصر الزوجية (2, 4, 6...) تظهر على اليمين في التصميم */
+.timeline-item:nth-child(even) {
+    left: 50%; 
+    transform: translateX(-50%); 
+    text-align: left; /* محاذاة النص داخل البطاقة لليسار */
+}
+
+/* ----------------------------------------------------- */
+
+/* الدائرة: الإعدادات الأساسية (لا تغيير) */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: var(--card-background);
+    border: 4px solid var(--primary-color);
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1; 
+}
+
+/* الدوائر للعناصر الفردية (اليسار) */
+.timeline-item:nth-child(odd)::after {
+    left: -14px; 
+    right: auto;
+}
+
+/* الدوائر للعناصر الزوجية (اليمين) */
+.timeline-item:nth-child(even)::after {
+    right: -14px; 
+    left: auto;
+}
+
+/* ----------------------------------------------------- */
+
+/* الحدود الجمالية: الحدود الخاصة بكل جانب */
+/* البطاقات الفردية (اليسار): الحد يكون على اليسار */
+.timeline-item:nth-child(odd) .content {
+    border-right: none;
+    border-left: 5px solid var(--primary-color);
+}
+
+/* البطاقات الزوجية (اليمين): الحد يكون على اليمين */
+.timeline-item:nth-child(even) .content {
+    border-left: none;
+    border-right: 5px solid var(--primary-color);
+}
+/* تنسيق خاص لبطاقات القفل للتأكد من توسط النص دائمًا */
+
+
+
+    /* محتوى البطاقة */
+    .content {
+        padding: 20px 30px;
+        background-color: var(--card-background);
+        position: relative;
+        border-radius: 6px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        text-align: right;
+        border-right: 5px solid var(--primary-color);
+    }
+
+    /* حالة القفل - الأهم */
+    .locked .content {
+        background-color: var(--locked-color);
+        color: #ccc;
+        opacity: 0.7;
+        text-align: center !important;
+        cursor: not-allowed;
+        min-height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.5s ease;
+        border-right: 5px solid #888;
+    }
+
+    .locked:hover .content {
+         opacity: 0.9;
+    }
+    
+    .locked i.fa-lock {
+        font-size: 2em;
+        margin-bottom: 10px;
+        color: #eee;
+    }
+
+    /* محتوى البطاقة المفتوحة */
+    .unlocked h3 {
+        color: var(--primary-color);
+    }
+
+    .unlocked img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-top: 10px;
+    }
+    
+    /* تنسيق خاص للعناصر المميزة مثل **النص** */
+    .unlocked p strong {
+        color: var(--primary-color);
+    }
+
+    /* رسالة الترحيب */
+    .hero {
+        background-color: var(--card-background);
+        padding: 30px;
+        border-radius: 10px;
+        margin-bottom: 50px;
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+    }
+
+    .hero p {
+        font-size: 1.1em;
+        line-height: 1.6;
+    }
+
+    /* ميديا كويري لجعله متجاوبًا على الموبايل */
+    @media screen and (max-width: 600px) {
+        .timeline::after {
+            right: 5px; /* نقل الخط لليسار */
+            margin-right: 0;
+        }
+        .timeline-item {
+            width: 100%;
+            padding-left: 70px; /* مساحة للدائرة والخط */
+            padding-right: 10px;
+            transform: none; /* إلغاء التحريك */
+            left: 0;
+            right: 0;
+        }
+        .timeline-item::after {
+            left: -17px;
+            right: auto;
+        }
+        .timeline-item:nth-child(even)::after {
+            right: auto;
+            left: -17px;
+        }
+        .content {
+             border-right: none;
+             border-left: 5px solid var(--primary-color);
+        }
+    }
+</style>
+</head>
+<body>
+
+    <div class="hero">
+        <h1>الى حياتي وحب عمري</h1>
+        <p>كل سنة وانتي طيبة ياروحيييييييييييييي ، ربنا يديكي طول العمر يارب يا مراتي وحياتي انتي مش هطول هنا في الكلام ونخليها مفاجاة انتي قدامك دلوقتي وقت زمني ايه هو بقا ،ده يست الكل التوقيت اللي انتي شايفاهم هيفتح فيهم رسايل او مفاجات مختلفة </p>
+    </div>
+
+    <div class="timeline">
+
+        <div class="timeline-item" data-time="21">
+            <div id="content-10" class="content locked">
+                <i class="fas fa-lock"></i>
+                <p>تفتح الساعة **9:00 مساءا**</p>
+                <div class="reveal-content" style="display: none;">
+                    <h3>اول مرة </h3>
+                    <p>اول مرة شوفت فيها ضحكتك عمري ما اقدر انساه ضحكة واحده بس والله وقعتني على الاخر ضحكة جابتني سابع ارض ضحكة طيرتني في السما ضحكة عيشتني احلى ذكريات ضحكة كل مرة بشوفها بحس انها اول مرة ضحكة بتخليني احس انه مفيش حد تاني في الحياة بيعرف يضحك زيها ضحكة خلتني زي المدمن ضحكة خلتني مهووس بيها</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-time="22">
+            <div id="content-13" class="content locked">
+                <i class="fas fa-lock"></i>
+                <p>تفتح الساعة **10:00 مساءا**</p>
+                <div class="reveal-content" style="display: none;">
+                    <h3>كلمة من القلب ❤️</h3>
+                    <p><a href="letter.html" style="color: white;">اضغطي هنا</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-time="23">
+            <div id="content-16" class="content locked">
+                <i class="fas fa-lock"></i>
+                <p>تفتح الساعة **11:00 مساءا**</p>
+                <div class="reveal-content" style="display: none;">
+                    <h3>حاجات فيكي عمري ما كنت اتخيل اني احبها </h3>
+                    <p><br>أنا حاسس انه دي هتظلم جامد لان انتي فيكي حاجات كتير جداا جداا ولو كتبتها مش هخلص بجد بس انتي احلى من كده بكتير بس هكتب شوية حاجات بسيطة : 
+• عيونك دي احلى حاجة والله بحب اني بحبها جدا لان مهما كبرنا هتفضل زي ما هي وكل ما أشوفها هفتكر انه أنا وقعت بسببها ومفيش حاجة أجمل منها 
+• ضحكتك دي حاجة اقسم بالله حرفيا ضحكتك وقعتني على الاخر بس بجد مفيش احلى من اي وقت بشوف فيه ضحكتك وكل مرة بتمنى اكتر انه اشوف ضحكتك وكل مرة تضحكي فيها بحس نفسي اتجننت 
+• ⁠دي قله ادب بس هقولها 😂😂 شفايفك الصراحة تحفة ونفسها ابوسسسسك انتي تحفة اقسم بالله 
+• ⁠مناخيرك القرقوشة بتاعي دي حلوة اوي والله العظيم تتاكل 
+• ⁠حتى رموشك وحواجبك حلوين اوي والله العظيم 
+• ⁠خدودك حاجة تانيه خالص بجد دي لو راحت هتجنن وهموتك فيها 
+• ⁠والباقي مينفعش نقوله عشان عيب بس هنختصر بانك مزة ووتكة يبوييي
+• ⁠بجد انتي مفيش احلى من حلاوتك دي والله العظيم طبعا طبعا أنا مدكرتش لسه اي حاجة من الصفات لان بجد لو هكتب فا أنا محتاج ولا عشرين صفحة</p>
+                </div>
+            </div>
+        </div>
+        <div class="timeline-item" data-time="23.5">
+            <div id="content-19" class="content locked">
+                <i class="fas fa-lock"></i>
+                <p>تفتح الساعة **11:30 مساءً**</p>
+                <div class="reveal-content" style="display: none;">
+                    <h3>Always & Forever♾️</h3>
+                    <p>بحبك جدا يا عمري ومعلش انه الحاجات بسيطة كان نفسي اعمل ليكي اكتر من كده ان شاء الله يعجبوكي يا حياتي وانا بموت فيكي اوي والله يا مريم</p>
+                </div>
+            </div>
+        </div>
+        <div class="timeline-item" data-time="24">
+            <div id="content-16" class="content locked">
+                <i class="fas fa-lock"></i>
+                <p>تفتح الساعة **10:00 مساءا**</p>
+                <div class="reveal-content" style="display: none;">
+                    <h3>اخر حاجة</h3>
+                    <p><a href="https://wishify.io/?card=card_1763657191776_0ow8jbess" style="color: white;">اضغطي هنا</a></p> 
+                </div>
+            </div>
+        </div>
+
+        
+
+
+    </div> <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    // دالة مساعدة لتحويل قيمة الوقت (22.5) إلى نص (22:30)
+    function formatTime(timeValue) {
+        // فصل الجزء الصحيح (الساعة) عن الجزء العشري (الدقائق)
+        const hour = Math.floor(timeValue);
+        const minutes = (timeValue % 1) * 60; // 0.5 * 60 = 30
+        
+        // تحويل الساعة من نظام 24 إلى 12 ساعة مع تحديد صباحاً/مساءً
+        const displayHour = hour > 12 ? hour - 12 : hour;
+        const period = hour >= 12 ? 'مساءً' : 'صباحاً';
+
+        // تنسيق الدقائق: التأكد من أنها 00 أو 30
+        const displayMinutes = minutes === 0 ? '00' : '30';
+        
+        return `${displayHour}:${displayMinutes} ${period}`;
+    }
+
+    function checkTimeline() {
+        // الحصول على الساعة الحالية بنظام 24 ساعة (0-23)
+        const now = new Date();
+        // **الآن currentHour يدعم الساعات النصفية بدقة**
+        const currentHour = now.getHours() + (now.getMinutes() / 60);
+
+        timelineItems.forEach(item => {
+            // **ملاحظة:** تأكد من استخدام parseFloat بدلاً من parseInt لدعم الأرقام العشرية
+            const timeToOpen = parseFloat(item.getAttribute('data-time')); 
+            const contentDiv = item.querySelector('.content');
+            const revealDiv = item.querySelector('.reveal-content');
+
+            // شرط الفتح: إذا كانت الساعة الحالية أكبر من أو تساوي ساعة الفتح المحددة
+            if (currentHour >= timeToOpen) {
+                // إزالة القفل وتطبيق محتوى الفتح
+                contentDiv.classList.remove('locked');
+                contentDiv.classList.add('unlocked');
+
+                // إظهار المحتوى المخفي وإخفاء رسالة القفل
+                contentDiv.innerHTML = revealDiv.innerHTML;
+                
+                // إضافة تأثير بصري خفيف 
+                contentDiv.style.transition = 'opacity 1s';
+                contentDiv.style.opacity = '0';
+                setTimeout(() => {
+                     contentDiv.style.opacity = '1';
+                }, 50); 
+                
+            } else {
+                // إبقاء القفل في حالة عدم وصول الوقت
+                contentDiv.classList.add('locked');
+                contentDiv.classList.remove('unlocked');
+                
+                // استخدام الدالة الجديدة لتنسيق الوقت للعرض
+                const displayTime = formatTime(timeToOpen);
+
+                // التأكد من أن محتوى القفل هو الظاهر
+                const lockMessage = `<i class="fas fa-lock"></i><p>تفتح الساعة **${displayTime}**</p>`;
+                contentDiv.innerHTML = lockMessage;
+            }
+        });
+    }
+
+    // تشغيل الدالة عند تحميل الصفحة
+    checkTimeline();
+
+    // تشغيل الدالة كل دقيقة لضمان فتح البطاقات بدقة
+    setInterval(checkTimeline, 60000); 
+});
+    </script>
+</body>
+</html>
