@@ -26,6 +26,7 @@
         .container > .envelope-wrapper {
             background: var(--bg-envelope-color);
             box-shadow: 0 0 50px var(--shadow-color); /* زيادة الظل */
+            margin-top: 300px;
         }
         .container .envelope-wrapper .envelope{
             position: relative;
@@ -81,7 +82,7 @@
         }
         .heart{
             position: absolute;
-            top: 54%;
+            top: 71%;
             left: 50%;
             width: 25px; /* تم التكبير */
             height: 25px; /* تم التكبير */
