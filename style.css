@@ -115,7 +115,7 @@
             z-index: 0;
         }
         .flap .envelope .letter {
-            bottom: 275px; /* تم التعديل للرفع أكثر */
+            bottom: 350px; /* تم التعديل للرفع أكثر */
             transform: scale(1.1); /* تم التعديل لزوم أقل وأوضح */
             transition-delay: 1s;
         }
